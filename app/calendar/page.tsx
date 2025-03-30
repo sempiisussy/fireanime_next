@@ -50,9 +50,9 @@ export default async function CalendarPage() {
       {Object.entries(groupedByDate).map(([date, items]) => (
         <div key={date} className="mb-10">
           <h2 className="text-xl font-bold mb-4 pb-2 border-b">
-            
+
             {date}
-            </h2>
+          </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {items.map((item) => (
@@ -77,7 +77,20 @@ export default async function CalendarPage() {
                   </p>
 
                   <p className="text-sm mt-1">{item.time_details}</p>
-
+                  <p className="text-xs text-muted-foreground mt-1 flex gap-1 w-full">
+                    {(() => {
+                      switch (item.lang) {
+                        case 'ger-sub':
+                          return <span>GER-SUB</span>
+                        case 'ger-dub':
+                          return <span>GER-DUB</span>
+                        case 'eng-sub':
+                          return <span>ENG-SUB</span>
+                        default:
+                          return ""
+                      }
+                    })()}
+                  </p>
                   {item.episode_is_available ? (
                     <Link
                       href={`/anime/${item.anime.slug}/${item.season}/${item.episode}`}
