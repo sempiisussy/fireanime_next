@@ -6,10 +6,11 @@ export async function generateMetadata(props: {
     params: Promise<{ genre: string }>
 }) {
     const params = await props.params;
+    const genre = atob(params.genre)
 
     return {
-        title: `Anime from the Genre ${params.genre} - FireAnime`,
-        description: `Browse anime by genre category ${params.genre}.`,
+        title: `Anime from the Genre ${genre} - FireAnime`,
+        description: `Browse anime by genre category ${genre}.`,
     }
 }
 
@@ -19,6 +20,7 @@ export default async function GenrePage(props: {
 }) {
     const params = await props.params;
     const searchParams = await props.searchParams
+    const genre = atob(params.genre)
 
 // Get the current page from the URL query or default to 1
 const currentPage = typeof searchParams.page === "string" ? Number.parseInt(searchParams.page) : 1
@@ -28,7 +30,7 @@ let totalPages = 1
 
 try {
   // Pass the current page to your API function
-  const response = await getAnimeFromGenre(params.genre, currentPage)
+  const response = await getAnimeFromGenre(genre, currentPage)
   animes = response.data
 
   // Assuming your API returns total pages information
@@ -52,14 +54,14 @@ if (animes.length === 0) {
 
 return (
   <div className="container py-8">
-    <h1 className="text-3xl font-bold mb-8">Browse Animes from the Genre {params.genre}</h1>
+    <h1 className="text-3xl font-bold mb-8">Browse Animes from the Genre {genre}</h1>
 
     <div className="mb-8">
       <AnimeGrid animes={animes} />
     </div>
 
     {/* Add the pagination component */}
-    <AnimePagination currentPage={currentPage} totalPages={totalPages} genre={params.genre} />
+    <AnimePagination currentPage={currentPage} totalPages={totalPages} genre={genre} />
   </div>
 )
 }
