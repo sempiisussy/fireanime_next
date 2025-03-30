@@ -30,13 +30,13 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-sm font-medium">Company</h3>
             <div className="flex flex-col mt-2 gap-2">
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary">
+              <Link href="/about" className="text-sm text-muted-foreground hover:text-primary">
                 About
               </Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary">
+              <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary">
                 Terms of Service
               </Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary">
+              <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary">
                 Privacy Policy
               </Link>
             </div>
