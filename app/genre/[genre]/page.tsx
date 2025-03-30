@@ -3,14 +3,16 @@ import { Card, CardContent } from "@/components/ui/card"
 import { getAnimeFromGenre, getGenres } from "@/lib/api"
 import AnimeGrid from "@/components/anime-grid"
 
-export async function generateMetadata({ params }: { params: { genre: string } }) {
+export async function generateMetadata(props: { params: Promise<{ genre: string }> }) {
+    const params = await props.params;
     return {
         title: `Anime from the Genre ${params.genre} - FireAnime`,
         description: `Browse anime by genre category ${params.genre}.`,
     }
 }
 
-export default async function GenrePage({ params }: { params: { genre: string } }) {
+export default async function GenrePage(props: { params: Promise<{ genre: string }> }) {
+    const params = await props.params;
     let animes = []
 
     try {

@@ -7,11 +7,12 @@ export const metadata = {
   description: "Search for your favorite anime series and episodes.",
 }
 
-export default function SearchPage({
-  searchParams,
-}: {
-  searchParams: { q?: string }
-}) {
+export default async function SearchPage(
+  props: {
+    searchParams: Promise<{ q?: string }>
+  }
+) {
+  const searchParams = await props.searchParams;
   const query = searchParams.q || ""
 
   return (

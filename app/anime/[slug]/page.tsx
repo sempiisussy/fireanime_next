@@ -7,7 +7,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { API_BASE_IMG_URL, getAnimeDetails } from "@/lib/api"
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   try {
     const response = await getAnimeDetails(params.slug)
     const anime = response.data
@@ -24,7 +25,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function AnimePage({ params }: { params: { slug: string } }) {
+export default async function AnimePage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   let anime
 
   try {
