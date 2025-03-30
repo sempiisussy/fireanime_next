@@ -154,6 +154,59 @@ export interface AnimeEpisodeLink {
   anime_episode_id: number
 }
 
+export interface NewestAnimeEpisodesResponse {
+  data: NewestAnimeEpisode[]
+  pages: number
+  status: number
+}
+
+export interface NewestAnimeEpisode {
+  episode_id: number
+  created_at: string
+  slug: string
+  season: string
+  episode: string
+  poster: string
+  backdrop: string
+  image: string
+  title: string
+  has_ger_sub: boolean
+  has_ger_dub: boolean
+  has_eng_sub: boolean
+}
+
+export interface AnimesFromGenreResponse {
+  data: AnimeFromGenre[]
+  pages: number
+  status: number
+}
+
+export interface AnimeFromGenre {
+  id: number
+  created_at: string
+  updated_at: string
+  last_sync: string
+  slug: string
+  title: string
+  alternate_titles: string
+  generes: string[]
+  imdb?: string
+  tmdb: number
+  tmdb_type: string
+  anilist: any
+  desc: string
+  start: number
+  end?: number
+  poster: string
+  backdrop: string
+  vote_avg: number
+  vote_count: number
+  item_type: string
+  anime_seasons: any
+}
+
+
+
 export const API_BASE_URL = "https://fireani.me/api"
 export const API_BASE_IMG_URL = "https://fireani.me"
 
@@ -200,6 +253,14 @@ export async function getGenres(): Promise<GenresResponse> {
   return response.json()
 }
 
+export async function getAnimeFromGenre(genre: string, page: number): Promise<AnimesFromGenreResponse> {
+  const response = await fetch(`${API_BASE_URL}/animes/genre?genere=${encodeURIComponent(genre)}&page=${encodeURIComponent(page)}`, { next: { revalidate: 86400 } })
+  if (!response.ok) {
+    throw new Error("Failed to get genres")
+  }
+  return response.json()
+}
+
 export async function getEpisode(slug: string, season: string, episode: string): Promise<EpisodeResponse> {
   const response = await fetch(
     `${API_BASE_URL}/anime/episode?slug=${encodeURIComponent(slug)}&season=${season}&episode=${episode}`,
@@ -207,6 +268,28 @@ export async function getEpisode(slug: string, season: string, episode: string):
   )
   if (!response.ok) {
     throw new Error("Failed to get episode")
+  }
+  return response.json()
+}
+
+export async function getBest(page: number): Promise<AnimeSearchResponse> {
+  const response = await fetch(
+    `${API_BASE_URL}/animes/best?page=${encodeURIComponent(page)}`,
+    { next: { revalidate: 3600 } },
+  )
+  if (!response.ok) {
+    throw new Error("Failed to list best animes")
+  }
+  return response.json()
+}
+
+export async function getNewestEpisodes(page: number): Promise<NewestAnimeEpisodesResponse> {
+  const response = await fetch(
+    `${API_BASE_URL}/animes/newest-episodes?page=${encodeURIComponent(page)}`,
+    { next: { revalidate: 3600 } },
+  )
+  if (!response.ok) {
+    throw new Error("Failed to list best animes")
   }
   return response.json()
 }

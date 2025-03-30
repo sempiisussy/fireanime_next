@@ -98,7 +98,7 @@ const HeroSlider = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/20 hover:bg-background/40 rounded-full h-10 w-10"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/20 hover:bg-background/40 rounded-full h-10 w-10 z-20"
         onClick={goToPrevious}
       >
         <ChevronLeft className="h-6 w-6" />
@@ -108,7 +108,7 @@ const HeroSlider = () => {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/20 hover:bg-background/40 rounded-full h-10 w-10"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/20 hover:bg-background/40 rounded-full h-10 w-10 z-20"
         onClick={goToNext}
       >
         <ChevronRight className="h-6 w-6" />

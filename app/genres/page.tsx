@@ -7,6 +7,7 @@ export const metadata = {
   description: "Browse anime by genre categories.",
 }
 
+
 export default async function GenresPage() {
   let genres = []
 
@@ -35,7 +36,7 @@ export default async function GenresPage() {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {genres.map((genre) => (
-          <Link key={genre} href={`/search?q=${encodeURIComponent(genre)}`}>
+          <Link key={genre} href={`/genre/${encodeURIComponent(genre)}`}>
             <Card className="hover:bg-muted transition-colors">
               <CardContent className="p-6 flex items-center justify-center h-32">
                 <h2 className="text-lg font-medium text-center">{genre}</h2>

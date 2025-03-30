@@ -3,7 +3,8 @@ import AnimeGrid from "@/components/anime-grid"
 import { Button } from "@/components/ui/button"
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
-import { searchAnime } from "@/lib/api"
+import { getBest, getNewestEpisodes, searchAnime } from "@/lib/api"
+import AnimeEpisodeGrid from "@/components/anime-episode-grid"
 
 export const metadata = {
   title: "FireAnime - Home",
@@ -12,8 +13,8 @@ export const metadata = {
 
 export default async function HomePage() {
   // Fetch data server-side
-  const trendingResponse = await searchAnime("naruto")
-  const newReleasesResponse = await searchAnime("one piece")
+  const trendingResponse = await getBest(1)
+  const newReleasesResponse = await getNewestEpisodes(1)
 
   const trendingAnime = trendingResponse.data.slice(0, 12)
   const newReleases = newReleasesResponse.data.slice(0, 12)
@@ -44,7 +45,7 @@ export default async function HomePage() {
               </Link>
             </Button>
           </div>
-          <AnimeGrid animes={newReleases} />
+          <AnimeEpisodeGrid animes={newReleases} />
         </div>
       </div>
     </div>
