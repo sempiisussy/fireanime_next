@@ -28,7 +28,7 @@ export default async function HomePage() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold">Trending Now</h2>
             <Button variant="ghost" asChild>
-              <Link href="/search?sort=trending" className="flex items-center">
+              <Link href="/trending" className="flex items-center">
                 View All <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
@@ -40,7 +40,7 @@ export default async function HomePage() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold">New Releases</h2>
             <Button variant="ghost" asChild>
-              <Link href="/search?sort=newest" className="flex items-center">
+              <Link href="/new-releases" className="flex items-center">
                 View All <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>

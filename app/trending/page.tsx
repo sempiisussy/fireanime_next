@@ -1,6 +1,6 @@
-import { getAnimeFromGenre } from "@/lib/api"
+import { getAnimeFromGenre, getBest } from "@/lib/api"
 import AnimeGrid from "@/components/anime-grid"
-import AnimePagination from "@/components/pagination";
+import AnimePagination from "@/components/pagination-universal";
 
 export async function generateMetadata(props: {
     params: Promise<{ genre: string }>
@@ -8,16 +8,14 @@ export async function generateMetadata(props: {
     const params = await props.params;
 
     return {
-        title: `Anime from the Genre ${params.genre} - FireAnime`,
-        description: `Browse anime by genre category ${params.genre}.`,
+        title: `Trending Animes on Fireanime - FireAnime`,
+        description: `Browse Trending Animes that are currently loved all over the world.`,
     }
 }
 
-export default async function GenrePage(props: {
-    params: Promise<{ genre: string }>
+export default async function TrendingPage(props: {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-    const params = await props.params;
     const searchParams = await props.searchParams
 
 // Get the current page from the URL query or default to 1
@@ -28,7 +26,7 @@ let totalPages = 1
 
 try {
   // Pass the current page to your API function
-  const response = await getAnimeFromGenre(params.genre, currentPage)
+  const response = await getBest(currentPage)
   animes = response.data
 
   // Assuming your API returns total pages information
@@ -52,14 +50,14 @@ if (animes.length === 0) {
 
 return (
   <div className="container py-8">
-    <h1 className="text-3xl font-bold mb-8">Browse Animes from the Genre {params.genre}</h1>
+    <h1 className="text-3xl font-bold mb-8">Browse Trending Animes</h1>
 
     <div className="mb-8">
       <AnimeGrid animes={animes} />
     </div>
 
     {/* Add the pagination component */}
-    <AnimePagination currentPage={currentPage} totalPages={totalPages} genre={params.genre} />
+    <AnimePagination currentPage={currentPage} totalPages={totalPages} pathPrefix="/trending" />
   </div>
 )
 }
