@@ -84,12 +84,12 @@ const Navbar = () => {
 
           <ThemeToggle />
 
-          <Button variant="ghost" size="icon" className="ml-2">
+          {/* <Button variant="ghost" size="icon" className="ml-2">
             <Bell className="h-5 w-5" />
             <span className="sr-only">Notifications</span>
-          </Button>
+          </Button> */}
 
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="ml-2">
                 <User className="h-5 w-5" />
@@ -103,7 +103,7 @@ const Navbar = () => {
                 }
               }}>Register</DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
         </div>
       </div>
     </header>
