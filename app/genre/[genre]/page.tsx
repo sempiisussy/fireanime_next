@@ -1,6 +1,6 @@
 import { getAnimeFromGenre } from "@/lib/api"
 import AnimeGrid from "@/components/anime-grid"
-import AnimePagination from "@/components/pagination";
+import AnimePagination from "@/components/pagination-universal";
 
 export async function generateMetadata(props: {
   params: Promise<{ genre: string }>
@@ -79,7 +79,7 @@ export default async function GenrePage(props: {
       </div>
 
       {/* Add the pagination component */}
-      <AnimePagination currentPage={currentPage} totalPages={totalPages} genre={genre} />
+      <AnimePagination currentPage={currentPage} totalPages={totalPages} pathPrefix={`/${params.genre}`} />
     </div>
   )
 }
