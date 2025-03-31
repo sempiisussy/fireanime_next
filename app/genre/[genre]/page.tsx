@@ -79,7 +79,7 @@ export default async function GenrePage(props: {
       </div>
 
       {/* Add the pagination component */}
-      <AnimePagination currentPage={currentPage} totalPages={totalPages} pathPrefix={`/${params.genre}`} />
+      <AnimePagination currentPage={currentPage} totalPages={totalPages} pathPrefix={`/genre/${params.genre}`} />
     </div>
   )
 }
