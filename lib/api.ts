@@ -222,7 +222,7 @@ export async function searchAnime(query: string): Promise<AnimeSearchResponse> {
 }
 
 export async function getAnimeDetails(slug: string): Promise<AnimeDetailsResponse> {
-  const response = await fetch(`${API_BASE_URL}/anime?slug=${encodeURIComponent(slug)}`, { next: { revalidate: 3600 } })
+  const response = await fetch(`${API_BASE_URL}/anime?slug=${encodeURIComponent(slug)}`, { next: { revalidate: 60 } })
   if (!response.ok) {
     throw new Error("Failed to get anime details")
   }
@@ -238,7 +238,7 @@ export async function getSliders(): Promise<SliderResponse> {
 }
 
 export async function getCalendar(): Promise<CalendarResponse> {
-  const response = await fetch(`${API_BASE_URL}/calendars`, { next: { revalidate: 3600 } })
+  const response = await fetch(`${API_BASE_URL}/calendars`, { next: { revalidate: 60 } })
   if (!response.ok) {
     throw new Error("Failed to get calendar")
   }
@@ -264,7 +264,7 @@ export async function getAnimeFromGenre(genre: string, page: number): Promise<An
 export async function getEpisode(slug: string, season: string, episode: string): Promise<EpisodeResponse> {
   const response = await fetch(
     `${API_BASE_URL}/anime/episode?slug=${encodeURIComponent(slug)}&season=${season}&episode=${episode}`,
-    { next: { revalidate: 3600 } },
+    { next: { revalidate: 60 }, signal: AbortSignal.timeout(15 * 1000), },
   )
   if (!response.ok) {
     throw new Error("Failed to get episode")
@@ -286,7 +286,7 @@ export async function getBest(page: number): Promise<AnimeSearchResponse> {
 export async function getNewestEpisodes(page: number): Promise<NewestAnimeEpisodesResponse> {
   const response = await fetch(
     `${API_BASE_URL}/animes/newest-episodes?page=${encodeURIComponent(page)}`,
-    { next: { revalidate: 3600 } },
+    { next: { revalidate: 60 } },
   )
   if (!response.ok) {
     throw new Error("Failed to list best animes")
